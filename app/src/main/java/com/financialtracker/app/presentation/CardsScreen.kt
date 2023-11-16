@@ -17,7 +17,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,9 +37,6 @@ import com.financialtracker.app.domain.model.basedto.CardsInstallment
 import com.financialtracker.app.ui.theme.baseBackground
 import com.financialtracker.app.ui.theme.green
 import com.financialtracker.app.ui.theme.white
-import com.zarplaty.daet.payday.presentation.ItemCreditCard
-import com.zarplaty.daet.payday.presentation.ItemDebitCard
-import com.zarplaty.daet.payday.presentation.ItemInstallmentCard
 
 @Composable
 fun CardsScreen(
@@ -72,12 +68,12 @@ fun CardsScreen(
             if (!creditCards.isNullOrEmpty()) {
                 Button(
                     modifier = modifier
-                        .weight(1f)
-                        .clip(shape = RoundedCornerShape(5.dp)),
+                        .weight(1f),
                     onClick = { onEvent(MainEvent.OnChangeTypeCard(TypeCard.CardCredit)) },
                     colors = ButtonDefaults.outlinedButtonColors(
                         containerColor = baseBackground
                     ),
+                    shape = RoundedCornerShape(5.dp),
                     contentPadding = PaddingValues(8.dp),
                     border = BorderStroke(
                         width = 1.dp,
@@ -97,12 +93,12 @@ fun CardsScreen(
             if (!debitCards.isNullOrEmpty()) {
                 Button(
                     modifier = modifier
-                        .weight(1f)
-                        .clip(shape = RoundedCornerShape(5.dp)),
+                        .weight(1f),
                     onClick = { onEvent(MainEvent.OnChangeTypeCard(TypeCard.CardDebit)) },
                     colors = ButtonDefaults.outlinedButtonColors(
                         containerColor = baseBackground
                     ),
+                    shape = RoundedCornerShape(5.dp),
                     contentPadding = PaddingValues(8.dp),
                     border = BorderStroke(
                         width = 1.dp,
@@ -122,12 +118,12 @@ fun CardsScreen(
             if (!installmentCards.isNullOrEmpty()) {
                 Button(
                     modifier = modifier
-                        .weight(1f)
-                        .clip(shape = RoundedCornerShape(5.dp)),
+                        .weight(1f),
                     onClick = { onEvent(MainEvent.OnChangeTypeCard(TypeCard.CardInstallment)) },
                     colors = ButtonDefaults.outlinedButtonColors(
                         containerColor = baseBackground
                     ),
+                    shape = RoundedCornerShape(5.dp),
                     contentPadding = PaddingValues(vertical = 8.dp),
                     border = BorderStroke(
                         width = 1.dp,

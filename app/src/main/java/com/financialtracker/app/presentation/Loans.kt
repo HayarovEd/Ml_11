@@ -1,5 +1,5 @@
 
-package com.zarplaty.daet.payday.presentation
+package com.financialtracker.app.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -11,13 +11,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.financialtracker.app.presentation.MainEvent
-import com.zarplaty.daet.payday.domain.model.basedto.BaseState
-import com.zarplaty.daet.payday.domain.model.basedto.Loan
-import com.zarplaty.daet.payday.theme.baseBackground
+import com.financialtracker.app.domain.model.basedto.BaseState
+import com.financialtracker.app.domain.model.basedto.Loan
+import com.financialtracker.app.ui.theme.baseBackground
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable

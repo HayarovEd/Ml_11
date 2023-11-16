@@ -46,8 +46,6 @@ import com.financialtracker.app.ui.theme.baseBackground
 import com.financialtracker.app.ui.theme.green
 import com.financialtracker.app.ui.theme.grey
 import com.financialtracker.app.ui.theme.white
-import com.zarplaty.daet.payday.presentation.Credits
-import com.zarplaty.daet.payday.presentation.Loans
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -112,7 +110,7 @@ fun ConnectScreen(
         },
         bottomBar = {
             BottomAppBar(
-                containerColor = white,
+                containerColor = baseBackground,
                 modifier = modifier
                     .clip(shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
             ) {

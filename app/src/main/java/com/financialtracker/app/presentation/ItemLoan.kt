@@ -1,5 +1,5 @@
 
-package com.zarplaty.daet.payday.presentation
+package com.financialtracker.app.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -20,17 +20,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.financialtracker.app.presentation.MainEvent
-import com.financialtracker.app.presentation.RowCard
-import com.financialtracker.app.presentation.RowData
-import com.zarplaty.daet.payday.R
-import com.zarplaty.daet.payday.data.VALUE_ONE
-import com.zarplaty.daet.payday.domain.model.ElementOffer
-import com.zarplaty.daet.payday.domain.model.StatusApplication
-import com.zarplaty.daet.payday.domain.model.basedto.BaseState
-import com.zarplaty.daet.payday.domain.model.basedto.Loan
-import com.zarplaty.daet.payday.theme.titleText
-import com.zarplaty.daet.payday.theme.white
+import com.financialtracker.app.R
+import com.financialtracker.app.data.VALUE_ONE
+import com.financialtracker.app.domain.model.ElementOffer
+import com.financialtracker.app.domain.model.StatusApplication
+import com.financialtracker.app.domain.model.basedto.BaseState
+import com.financialtracker.app.domain.model.basedto.Loan
+import com.financialtracker.app.ui.theme.cardColor
+import com.financialtracker.app.ui.theme.green
 
 @Composable
 fun ItemLoan(
@@ -44,7 +41,7 @@ fun ItemLoan(
             .fillMaxWidth()
             //.border(width = 3.dp, color = grey, shape = RoundedCornerShape(15.dp))
             .clip(shape = RoundedCornerShape(25.dp))
-            .background(color = white)
+            .background(color = cardColor)
             .padding(16.dp)
     ) {
         AsyncImage(
@@ -84,10 +81,10 @@ fun ItemLoan(
         )
         Spacer(modifier = modifier.height(13.dp))
         Text(
-            color = titleText,
-            fontStyle = FontStyle(R.font.nunito),
-            fontSize = 20.sp,
-            fontWeight = FontWeight(700),
+            color = green,
+            fontStyle = FontStyle(R.font.gotham),
+            fontSize = 18.sp,
+            fontWeight = FontWeight(500),
             text = loan.name
         )
         /*Row(

@@ -1,5 +1,5 @@
 
-package com.zarplaty.daet.payday.presentation
+package com.financialtracker.app.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -19,20 +19,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.financialtracker.app.presentation.MainEvent
-import com.zarplaty.daet.payday.R
-import com.zarplaty.daet.payday.domain.model.ElementOffer
-import com.zarplaty.daet.payday.domain.model.StatusApplication
-import com.zarplaty.daet.payday.domain.model.basedto.BaseState
-import com.zarplaty.daet.payday.theme.baseBackground
-import com.zarplaty.daet.payday.theme.blue
-import com.zarplaty.daet.payday.theme.white
+import com.financialtracker.app.R
+import com.financialtracker.app.domain.model.ElementOffer
+import com.financialtracker.app.domain.model.StatusApplication
+import com.financialtracker.app.domain.model.basedto.BaseState
+import com.financialtracker.app.ui.theme.baseBackground
+import com.financialtracker.app.ui.theme.border
+import com.financialtracker.app.ui.theme.green
+import com.financialtracker.app.ui.theme.secondText
 
 @Composable
 fun RowButtons(
@@ -65,8 +67,8 @@ fun RowButtons(
         Box(
             modifier = modifier
                 .weight(1f)
-                .border(width = 2.dp, color = blue, shape = RoundedCornerShape(25.dp))
-                .clip(shape = RoundedCornerShape(25.dp))
+                .border(width = 2.dp, color = border, shape = RoundedCornerShape(8.dp))
+                .clip(shape = RoundedCornerShape(8.dp))
                 .background(color = baseBackground)
                 .clickable(onClick = {
                     onEvent(
@@ -96,12 +98,12 @@ fun RowButtons(
                         )
                     )
                 })
-                .padding(vertical = 6.dp)
+                .padding(vertical = 13.dp)
         ) {
             Icon(
                 modifier = modifier.align(alignment = Alignment.Center),
                 imageVector = ImageVector.vectorResource(id = R.drawable.carbon_overflow),
-                tint = blue,
+                tint = green,
                 contentDescription = ""
             )
         }
@@ -109,8 +111,8 @@ fun RowButtons(
         Box(
             modifier = modifier
                 .weight(3f)
-                .clip(shape = RoundedCornerShape(25.dp))
-                .background(color = blue)
+                .clip(shape = RoundedCornerShape(8.dp))
+                .background(color = green)
                 .clickable(onClick = {
                     onEvent(
                         MainEvent.OnGoToWeb(
@@ -119,17 +121,28 @@ fun RowButtons(
                         )
                     )
                 })
-                .padding(vertical = 8.dp)
+                .padding(vertical = 16.dp, horizontal = 16.dp)
         ) {
-            Text(
-                modifier = modifier.align(alignment = Alignment.Center),
-                color = white,
-                fontStyle = FontStyle(R.font.nunito),
-                fontSize = 20.sp,
-                fontWeight = FontWeight(600),
-                text = titleOffer,
-                textAlign = TextAlign.Center
-            )
+            Row (
+                modifier = modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Text(
+                    text = stringResource(id = R.string.checkout),
+                    style = TextStyle(
+                        fontSize = 20.sp,
+                        fontFamily = FontFamily(Font(R.font.gotham)),
+                        fontWeight = FontWeight(700),
+                    ),
+                    color = secondText
+                )
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.baseline_arrow_outward_17),
+                    contentDescription = "",
+                    tint = secondText)
+            }
         }
     }
 }

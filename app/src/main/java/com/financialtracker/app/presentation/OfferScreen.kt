@@ -29,6 +29,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
@@ -50,6 +51,7 @@ import com.financialtracker.app.domain.model.StatusApplication
 import com.financialtracker.app.domain.model.basedto.BaseState
 import com.financialtracker.app.ui.theme.baseBackground
 import com.financialtracker.app.ui.theme.green
+import com.financialtracker.app.ui.theme.secondText
 import com.financialtracker.app.ui.theme.white
 
 @SuppressLint("ResourceAsColor")
@@ -110,12 +112,12 @@ fun OfferScreen(
                         .padding(horizontal = 24.dp),
                     shape = RoundedCornerShape(8.dp),
                     contentPadding = PaddingValues(
-                        vertical = 8.dp,
+                        vertical = 16.dp,
                         horizontal = 16.dp
                     ),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = green,
-                        contentColor = baseBackground,
+                        contentColor = secondText,
                     ),
                     onClick = {
                         onEvent(
@@ -169,7 +171,10 @@ fun OfferScreen(
             Spacer(modifier = modifier.height(35.dp))
             AndroidView(
                 modifier = modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .clip(shape= RoundedCornerShape(5.dp))
+                    .background(color = white)
+                    .padding(5.dp),
                 factory = { context -> TextView(context) },
                 update = {
                     it.setTextColor(R.color.white)
@@ -182,20 +187,23 @@ fun OfferScreen(
             Spacer(modifier = modifier.height(13.dp))
             RowData(
                 title = stringResource(id = R.string.amount),
-                content = elementOffer.amount
+                content = elementOffer.amount,
+                colorBack = baseBackground
             )
             if (elementOffer.showPercent == VALUE_ONE) {
                 Spacer(modifier = modifier.height(8.dp))
                 RowData(
                     title = stringResource(id =  R.string.bet),
-                    content = elementOffer.bet
+                    content = elementOffer.bet,
+                    colorBack = baseBackground
                 )
             }
             if (elementOffer.showTerm == VALUE_ONE) {
                 Spacer(modifier = modifier.height(8.dp))
                 RowData(
                     title = stringResource(id =  R.string.term),
-                    content = elementOffer.term
+                    content = elementOffer.term,
+                    colorBack = baseBackground
                 )
             }
             Spacer(modifier = modifier.height(24.dp))

@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -18,18 +19,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.financialtracker.app.R
 import com.financialtracker.app.ui.theme.baseBackground
+import com.financialtracker.app.ui.theme.cardColor
 import com.financialtracker.app.ui.theme.white
 
 @Composable
 fun RowData(
     modifier: Modifier = Modifier,
     title: String,
-    content: String
+    content: String,
+    colorBack: Color = cardColor
 ) {
     Row (
         modifier = modifier
             .fillMaxWidth()
-            .background(color = baseBackground)
+            .background(color = colorBack)
             .padding(vertical = 7.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
@@ -52,6 +55,7 @@ fun RowData(
         )
     }
 }
+/*
 @Preview
 @Composable
 private fun SampleRowData () {
@@ -59,4 +63,4 @@ private fun SampleRowData () {
         title = stringResource(id = R.string.bet),
         content = "elementOffer.bet"
     )
-}
+}*/
