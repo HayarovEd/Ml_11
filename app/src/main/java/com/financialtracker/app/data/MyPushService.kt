@@ -9,8 +9,8 @@ import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.financialtracker.app.MainActivity
 import com.financialtracker.app.R
+import com.financialtracker.app.presentation.MainActivity
 import com.huawei.hms.push.HmsMessageService
 import com.huawei.hms.push.RemoteMessage
 
