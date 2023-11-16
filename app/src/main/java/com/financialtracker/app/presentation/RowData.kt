@@ -1,4 +1,4 @@
-package com.zarplaty.daet.payday.presentation
+package com.financialtracker.app.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,9 +16,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.zarplaty.daet.payday.R
-import com.zarplaty.daet.payday.theme.secondText
-import com.zarplaty.daet.payday.theme.white
+import com.financialtracker.app.R
+import com.financialtracker.app.ui.theme.baseBackground
+import com.financialtracker.app.ui.theme.white
 
 @Composable
 fun RowData(
@@ -29,22 +29,22 @@ fun RowData(
     Row (
         modifier = modifier
             .fillMaxWidth()
-            .background(color = white)
+            .background(color = baseBackground)
             .padding(vertical = 7.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            color = secondText,
-            fontStyle = FontStyle(R.font.nunito),
+            color = white,
+            fontStyle = FontStyle(R.font.gotham),
             fontSize = 16.sp,
             fontWeight = FontWeight(400),
             text = title,
             textAlign = TextAlign.Start
         )
         Text(
-            color = secondText,
-            fontStyle = FontStyle(R.font.nunito),
+            color = white,
+            fontStyle = FontStyle(R.font.gotham),
             fontSize = 16.sp,
             fontWeight = FontWeight(600),
             text = content,

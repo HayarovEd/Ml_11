@@ -1,5 +1,6 @@
-package com.zarplaty.daet.payday.presentation
+package com.financialtracker.app.presentation
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,13 +31,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.financialtracker.app.presentation.MainEvent
-import com.zarplaty.daet.payday.R
+import com.financialtracker.app.R
 import com.financialtracker.app.presentation.MainEvent.Reconnect
-import com.zarplaty.daet.payday.theme.baseBackground
-import com.zarplaty.daet.payday.theme.blue
-import com.zarplaty.daet.payday.theme.secondText
-import com.zarplaty.daet.payday.theme.white
+import com.financialtracker.app.ui.theme.baseBackground
+import com.financialtracker.app.ui.theme.green
+import com.financialtracker.app.ui.theme.white
 
 @Composable
 fun NoInternetScreen(
@@ -55,28 +55,28 @@ fun NoInternetScreen(
             Image(
                 modifier = modifier.size(160.dp),
                 painter = painterResource(
-                id = R.drawable.no_connect),
+                id = R.drawable.no_connection),
                 contentDescription = "")
-            Spacer(modifier = modifier.height(24.dp))
+            Spacer(modifier = modifier.height(44.dp))
             Text(
                 text = stringResource(id = R.string.not_connect),
-                fontSize = 22.sp,
-                fontWeight = FontWeight(600),
-                fontStyle = FontStyle(R.font.nunito),
-                color = secondText,
+                fontSize = 24.sp,
+                fontWeight = FontWeight(500),
+                fontStyle = FontStyle(R.font.gotham),
+                color = green,
                 textAlign = TextAlign.Center
             )
-            Spacer(modifier = modifier.height(64.dp))
+            Spacer(modifier = modifier.height(43.dp))
             Text(
                 text = stringResource(id = R.string.try_internet),
-                fontSize = 18.sp,
+                fontSize = 16.sp,
                 fontWeight = FontWeight(400),
-                fontStyle = FontStyle(R.font.nunito),
-                color = secondText,
+                fontStyle = FontStyle(R.font.gotham),
+                color = white,
                 textAlign = TextAlign.Center
             )
             Spacer(modifier = modifier.height(64.dp))
-            Button(
+            /*Button(
                 modifier = modifier
                     .fillMaxWidth(),
                 shape = RoundedCornerShape(25.dp),
@@ -97,33 +97,35 @@ fun NoInternetScreen(
                         fontWeight = FontWeight(700),
                     )
                 )
-            }
+            }*/
         }
-        /*Button(
+        OutlinedButton(
             modifier = modifier
                 .fillMaxWidth()
                 .align(alignment = Alignment.BottomCenter),
-            shape = RoundedCornerShape(10.dp),
-            contentPadding = PaddingValues(
-                vertical = 7.dp
+            shape = RoundedCornerShape(8.dp),
+            border = BorderStroke(
+                width = 1.dp,
+                color = green
             ),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = yellow,
-                contentColor = darkText,
-                disabledContainerColor = grey,
-                disabledContentColor = white
+            contentPadding = PaddingValues(
+                vertical = 16.dp
+            ),
+            colors = ButtonDefaults.outlinedButtonColors(
+                containerColor = baseBackground,
+                contentColor = green,
             ),
             onClick = { onEvent(Reconnect) }
         ) {
             Text(
                 text = stringResource(id = R.string.reconnect),
                 style = TextStyle(
-                    fontSize = 18.sp,
-                    fontFamily = FontFamily(Font(R.font.open_sans)),
-                    fontWeight = FontWeight(600),
+                    fontSize = 20.sp,
+                    fontFamily = FontFamily(Font(R.font.gotham)),
+                    fontWeight = FontWeight(700),
                 )
             )
-        }*/
+        }
     }
 }
 @Preview

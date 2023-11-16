@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.financialtracker.app.presentation.MainEvent
+import com.financialtracker.app.presentation.RowCard
+import com.financialtracker.app.presentation.RowData
 import com.zarplaty.daet.payday.R
 import com.zarplaty.daet.payday.data.VALUE_ONE
 import com.zarplaty.daet.payday.domain.model.ElementOffer

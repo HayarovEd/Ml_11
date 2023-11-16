@@ -1,4 +1,4 @@
-package com.zarplaty.daet.payday.presentation
+package com.financialtracker.app.presentation
 
 import android.os.Build
 import android.widget.Toast
@@ -10,14 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.zarplaty.daet.payday.domain.model.StatusApplication
-import com.zarplaty.daet.payday.domain.model.StatusApplication.Info
-import com.zarplaty.daet.payday.domain.model.StatusApplication.Offer
-import com.zarplaty.daet.payday.domain.model.TypeCard
-import com.zarplaty.daet.payday.domain.model.basedto.BaseState.Cards
+import com.financialtracker.app.domain.model.StatusApplication
+import com.financialtracker.app.domain.model.TypeCard
+import com.financialtracker.app.domain.model.basedto.BaseState
 import com.financialtracker.app.presentation.MainEvent.OnChangeBaseState
 import com.financialtracker.app.presentation.MainEvent.OnChangeStatusApplication
-import com.financialtracker.app.presentation.MainViewModel
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
@@ -53,21 +50,30 @@ fun Sample(
                 db = state.value.dbData!!,
                 onClickCards = { onEvent(
                     OnChangeBaseState(
-                        Cards(
-                    typeCard = typeCard
-                ))
+                        BaseState.Cards(
+                            typeCard = typeCard
+                        )
+                    )
                 ) },
-                onClickCredits = { onEvent(OnChangeBaseState(Credits)) },
-                onClickLoans = { onEvent(OnChangeBaseState(Loans)) },
+                onClickCredits = { onEvent(OnChangeBaseState(BaseState.Credits)) },
+                onClickLoans = { onEvent(OnChangeBaseState(BaseState.Loans)) },
                 onClickRules = {
                     onEvent(
                         OnChangeStatusApplication(
-                            Info(
+                            StatusApplication.Info(
                                 currentBaseState = currentState.baseState,
                                 content = state.value.dbData!!.appConfig.privacyPolicyHtml
                             )
                         )
                     )
+                },
+                onClickPrimary = {
+                    onEvent(OnChangeBaseState(
+                        BaseState.WebPrimary(
+                            offerName = state.value.dbData!!.appConfig.namePrimary ?: "",
+                            url = state.value.dbData!!.appConfig.urlPrimary ?: ""
+                        )
+                    ))
                 },
                 loanLazyState = loanLazyState,
                 creditLazyState = creditLazyState,
@@ -89,13 +95,13 @@ fun Sample(
             NoInternetScreen(onEvent = viewModel::onEvent)
         }
 
-        is Info -> {
+        is StatusApplication.Info -> {
         }
 
-        is Offer -> {
+        is StatusApplication.Offer -> {
             OfferScreen(
-                elementOffer = (state.value.statusApplication as Offer).elementOffer,
-                baseState = (state.value.statusApplication as Offer).currentBaseState,
+                elementOffer = (state.value.statusApplication as StatusApplication.Offer).elementOffer,
+                baseState = (state.value.statusApplication as StatusApplication.Offer).currentBaseState,
                 onEvent = viewModel::onEvent,
             )
         }
@@ -110,6 +116,10 @@ fun Sample(
 
         StatusApplication.NoConnect -> {
             NoInternetScreen(onEvent = viewModel::onEvent)
+        }
+
+        StatusApplication.Splash -> {
+            SplashScreen()
         }
     }
 

@@ -1,5 +1,6 @@
-package com.zarplaty.daet.payday.presentation
+package com.financialtracker.app.presentation
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,19 +30,24 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.financialtracker.app.presentation.MainEvent
-import com.zarplaty.daet.payday.R
-import com.zarplaty.daet.payday.domain.model.basedto.BaseDto
-import com.zarplaty.daet.payday.domain.model.basedto.BaseState
-import com.zarplaty.daet.payday.domain.model.basedto.BaseState.Cards
-import com.zarplaty.daet.payday.domain.model.basedto.BaseState.Credits
-import com.zarplaty.daet.payday.domain.model.basedto.BaseState.Loans
-import com.zarplaty.daet.payday.domain.model.basedto.CardsCredit
-import com.zarplaty.daet.payday.domain.model.basedto.CardsDebit
-import com.zarplaty.daet.payday.domain.model.basedto.CardsInstallment
-import com.zarplaty.daet.payday.theme.blue
-import com.zarplaty.daet.payday.theme.grey
-import com.zarplaty.daet.payday.theme.white
+import com.financialtracker.app.R
+import com.financialtracker.app.R.drawable
+import com.financialtracker.app.R.string
+import com.financialtracker.app.data.VALUE_ONE
+import com.financialtracker.app.domain.model.basedto.BaseDto
+import com.financialtracker.app.domain.model.basedto.BaseState
+import com.financialtracker.app.domain.model.basedto.BaseState.Cards
+import com.financialtracker.app.domain.model.basedto.BaseState.Credits
+import com.financialtracker.app.domain.model.basedto.BaseState.Loans
+import com.financialtracker.app.domain.model.basedto.CardsCredit
+import com.financialtracker.app.domain.model.basedto.CardsDebit
+import com.financialtracker.app.domain.model.basedto.CardsInstallment
+import com.financialtracker.app.ui.theme.baseBackground
+import com.financialtracker.app.ui.theme.green
+import com.financialtracker.app.ui.theme.grey
+import com.financialtracker.app.ui.theme.white
+import com.zarplaty.daet.payday.presentation.Credits
+import com.zarplaty.daet.payday.presentation.Loans
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -54,6 +60,7 @@ fun ConnectScreen(
     debitCards: List<CardsDebit>,
     installmentCards: List<CardsInstallment>,
     onEvent: (MainEvent) -> Unit,
+    onClickPrimary: () -> Unit,
     onClickLoans: () -> Unit,
     onClickCards: () -> Unit,
     onClickCredits: () -> Unit,
@@ -65,9 +72,10 @@ fun ConnectScreen(
     instalmentCardLazyState: LazyListState,
 ) {
     val title = when (baseState) {
-        is Cards -> stringResource(id = R.string.cards)
-        Credits -> stringResource(id = R.string.credits)
-        Loans -> stringResource(id = R.string.loans)
+        is Cards -> stringResource(id = string.cards)
+        Credits -> stringResource(id = string.credits)
+        Loans -> stringResource(id = string.loans)
+        is BaseState.WebPrimary -> db.appConfig.namePrimary?: ""
     }
     Scaffold(
         modifier = modifier
@@ -84,9 +92,9 @@ fun ConnectScreen(
                     ) {
                         Text(
                             color = white,
-                            fontStyle = FontStyle(R.font.nunito),
+                            fontStyle = FontStyle(R.font.gotham),
                             fontSize = 20.sp,
-                            fontWeight = FontWeight(700),
+                            fontWeight = FontWeight(400),
                             text = title
                         )
                         /*IconButton(onClick = onClickRules) {
@@ -98,7 +106,7 @@ fun ConnectScreen(
                     }
                 },
                 colors = TopAppBarDefaults.smallTopAppBarColors(
-                    containerColor = blue
+                    containerColor = baseBackground
                 )
             )
         },
@@ -113,27 +121,49 @@ fun ConnectScreen(
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
+                    if (!db.appConfig.showedIconPrimary.isNullOrEmpty()
+                        && db.appConfig.showedIconPrimary == VALUE_ONE
+                        && !db.appConfig.namePrimary.isNullOrEmpty()
+                        && !db.appConfig.urlPrimary.isNullOrEmpty()) {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            IconButton(
+                                onClick = onClickPrimary) {
+                                Image(
+                                    imageVector = ImageVector.vectorResource(drawable.money_1),
+                                    contentDescription = "")
+                            }
+                            /*Text(
+                                color = if (baseState is Loans) green else lightGray,
+                                fontStyle = FontStyle(R.font.onest_400),
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Normal,
+                                text = db.appConfig.namePrimary
+                            )*/
+                        }
+                    }
                     if (!db.loans.isNullOrEmpty()) {
                         ItemBottomBar(
-                            color = if (baseState is Loans) blue else grey,
-                            content = stringResource(id = R.string.loans),
-                            icon = ImageVector.vectorResource(id = R.drawable.credits),
+                            color = if (baseState is Loans) green else grey,
+                            content = stringResource(id = string.loans),
+                            icon = ImageVector.vectorResource(id = drawable.credits),
                             onClick = onClickLoans
                         )
                     }
                     if (!db.cards.isNullOrEmpty()) {
                         ItemBottomBar(
-                            color = if (baseState is Cards) blue else grey,
-                            content = stringResource(id = R.string.cards),
-                            icon = ImageVector.vectorResource(id = R.drawable.cards),
+                            color = if (baseState is Cards) green else grey,
+                            content = stringResource(id = string.cards),
+                            icon = ImageVector.vectorResource(id = drawable.cards),
                             onClick = onClickCards
                         )
                     }
                     if (!db.credits.isNullOrEmpty()) {
                         ItemBottomBar(
-                            color = if (baseState is Credits) blue else grey,
-                            content = stringResource(id = R.string.credits),
-                            icon = ImageVector.vectorResource(id = R.drawable.credits),
+                            color = if (baseState is Credits) green else grey,
+                            content = stringResource(id = string.credits),
+                            icon = ImageVector.vectorResource(id = drawable.credits),
                             onClick = onClickCredits
                         )
                     }
@@ -177,6 +207,13 @@ fun ConnectScreen(
                     loanLazyState = loanLazyState
                 )
             }
+            is BaseState.WebPrimary -> {
+                WebViewScreenPrimary(
+                    url = db.appConfig.urlPrimary?:"",
+                    offerName = db.appConfig.namePrimary?:"",
+                    valuePaddings = valuePaddings,
+                    onEvent = onEvent)
+            }
         }
     }
 }
@@ -200,7 +237,7 @@ fun ItemBottomBar(
         }
         Text(
             color = color,
-            fontStyle = FontStyle(R.font.nunito),
+            fontStyle = FontStyle(R.font.gotham),
             fontSize = 11.sp,
             fontWeight = FontWeight(700),
             text = content

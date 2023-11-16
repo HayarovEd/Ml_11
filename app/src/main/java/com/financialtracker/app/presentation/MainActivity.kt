@@ -23,7 +23,6 @@ import com.financialtracker.app.data.SHARED_APPSFLYER_INSTANCE_ID
 import com.financialtracker.app.data.SHARED_DATA
 import com.financialtracker.app.ui.theme.Ml_11Theme
 import com.my.tracker.MyTracker
-import com.zarplaty.daet.payday.presentation.Sample
 import dagger.hilt.android.AndroidEntryPoint
 
 
