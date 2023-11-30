@@ -128,7 +128,7 @@ fun ConnectScreen(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             IconButton(
-                                modifier = modifier.size(60.dp),
+                                modifier = modifier.size(72.dp),
                                 onClick = onClickPrimary) {
                                 Image(
                                     imageVector = ImageVector.vectorResource(drawable.money_1),
@@ -227,7 +227,7 @@ fun ItemBottomBar(
     onClick: () -> Unit
 ) {
     Column(
-        modifier = modifier.size(60.dp),
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         IconButton(
