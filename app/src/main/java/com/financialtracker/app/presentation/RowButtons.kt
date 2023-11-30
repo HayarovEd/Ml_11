@@ -121,7 +121,7 @@ fun RowButtons(
                         )
                     )
                 })
-                .padding(vertical = 16.dp, horizontal = 16.dp)
+                .padding(vertical = 15.dp, horizontal = 16.dp)
         ) {
             Row (
                 modifier = modifier

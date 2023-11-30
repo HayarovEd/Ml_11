@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.BottomAppBar
@@ -127,6 +128,7 @@ fun ConnectScreen(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             IconButton(
+                                modifier = modifier.size(60.dp),
                                 onClick = onClickPrimary) {
                                 Image(
                                     imageVector = ImageVector.vectorResource(drawable.money_1),
@@ -145,7 +147,7 @@ fun ConnectScreen(
                         ItemBottomBar(
                             color = if (baseState is Loans) green else grey,
                             content = stringResource(id = string.loans),
-                            icon = ImageVector.vectorResource(id = drawable.credits),
+                            icon = ImageVector.vectorResource(id = drawable.loans),
                             onClick = onClickLoans
                         )
                     }
@@ -218,12 +220,14 @@ fun ConnectScreen(
 
 @Composable
 fun ItemBottomBar(
+    modifier: Modifier = Modifier,
     color: Color,
     icon: ImageVector,
     content: String,
     onClick: () -> Unit
 ) {
     Column(
+        modifier = modifier.size(60.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         IconButton(
